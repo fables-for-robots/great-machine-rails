@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for(:title) || "great-machine on Rails" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <style>
+      /* Light or dark as the system is: no switch of its own. */
+      :root {
+        color-scheme: light dark;
+        --ground: #f6f6f4; --card: #ffffff; --ink: #1c1c1a; --quiet: #6b6b66; --line: #e2e2dd;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root { --ground: #141413; --card: #1e1e1c; --ink: #ececea; --quiet: #9a9a94; --line: #30302d; }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1.5rem;
+        background: var(--ground); color: var(--ink);
+        font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      main { width: 100%; max-width: 40rem; }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+      .band { height: 0.75rem; background: hsl(var(--hue) 70% 45%); }
+      .body { padding: 1.5rem 1.75rem 1.75rem; }
+      h1 { margin: 0 0 0.25rem; font-size: 1.5rem; }
+      .pod { margin: 0 0 1.25rem; color: var(--quiet); }
+      .pod strong { color: var(--ink); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-weight: 600; }
+      .release {
+        display: inline-block; margin: 0 0 1.25rem; padding: 0.15rem 0.6rem; border-radius: 999px;
+        font: 600 0.85rem ui-monospace, "SF Mono", Menlo, monospace;
+        color: #fff; background: hsl(var(--hue) 70% 38%);
+      }
+      dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.35rem 1.25rem; margin: 0; }
+      dt { color: var(--quiet); }
+      dd { margin: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+      dd.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9rem; }
+      footer { margin-top: 1rem; color: var(--quiet); font-size: 0.9rem; }
+      a { color: inherit; }
+    </style>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

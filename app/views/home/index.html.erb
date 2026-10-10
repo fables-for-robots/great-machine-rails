@@ -1,0 +1,35 @@
+<% content_for :head do %>
+  <% if @watch %><meta http-equiv="refresh" content="1"><% end %>
+<% end %>
+
+<main style="--hue: <%= @facts[:hue] %>">
+  <div class="card">
+    <div class="band"></div>
+    <div class="body">
+      <h1><%= @facts[:greeting] %></h1>
+      <p class="pod">This answer came from the pod <strong><%= @facts[:pod] %></strong>.</p>
+
+      <span class="release"><%= @facts[:revision] || "no revision" %></span>
+
+      <dl>
+        <dt>Release</dt>
+        <dd class="mono"><%= @facts[:release] %></dd>
+        <dt>Started</dt>
+        <dd><%= lasted(@facts[:up_for]) %> ago, at <%= Release::STARTED_AT.strftime("%H:%M:%S") %> UTC</dd>
+        <dt>Requests</dt>
+        <dd><%= number_with_delimiter(@facts[:requests]) %> answered by this process (<%= @facts[:pid] %>)</dd>
+        <dt>Runs</dt>
+        <dd>Rails <%= @facts[:rails] %> on Ruby <%= @facts[:ruby] %>, <%= @facts[:environment] %></dd>
+      </dl>
+    </div>
+  </div>
+
+  <footer>
+    Every build is a release with a colour of its own. Roll another one out and
+    <% if @watch %>
+      watch: this page asks again every second. <%= link_to "Stop asking", root_path %>.
+    <% else %>
+      <%= link_to "ask again every second", root_path(watch: 1) %> to see the pods change over, one by one.
+    <% end %>
+  </footer>
+</main>
