@@ -9,6 +9,8 @@
 
 # Ignore all environment files.
 /.env*
+# direnv's file is no secret and is part of the project.
+!/.envrc
 
 # Ignore all logfiles and tempfiles.
 /log/*
